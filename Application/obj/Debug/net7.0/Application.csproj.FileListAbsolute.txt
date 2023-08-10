@@ -1,0 +1,12 @@
+C:\Users\Johnn\RiderProjects\TMS\Application\bin\Debug\net7.0\Application.deps.json
+C:\Users\Johnn\RiderProjects\TMS\Application\bin\Debug\net7.0\Application.dll
+C:\Users\Johnn\RiderProjects\TMS\Application\bin\Debug\net7.0\Application.pdb
+C:\Users\Johnn\RiderProjects\TMS\Application\obj\Debug\net7.0\Application.csproj.AssemblyReference.cache
+C:\Users\Johnn\RiderProjects\TMS\Application\obj\Debug\net7.0\Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Johnn\RiderProjects\TMS\Application\obj\Debug\net7.0\Application.AssemblyInfoInputs.cache
+C:\Users\Johnn\RiderProjects\TMS\Application\obj\Debug\net7.0\Application.AssemblyInfo.cs
+C:\Users\Johnn\RiderProjects\TMS\Application\obj\Debug\net7.0\Application.csproj.CoreCompileInputs.cache
+C:\Users\Johnn\RiderProjects\TMS\Application\obj\Debug\net7.0\Application.dll
+C:\Users\Johnn\RiderProjects\TMS\Application\obj\Debug\net7.0\refint\Application.dll
+C:\Users\Johnn\RiderProjects\TMS\Application\obj\Debug\net7.0\Application.pdb
+C:\Users\Johnn\RiderProjects\TMS\Application\obj\Debug\net7.0\ref\Application.dll

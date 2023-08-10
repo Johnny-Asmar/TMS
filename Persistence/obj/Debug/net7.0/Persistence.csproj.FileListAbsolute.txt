@@ -1,0 +1,12 @@
+C:\Users\Johnn\RiderProjects\TMS\Persistence\bin\Debug\net7.0\Persistence.deps.json
+C:\Users\Johnn\RiderProjects\TMS\Persistence\bin\Debug\net7.0\Persistence.dll
+C:\Users\Johnn\RiderProjects\TMS\Persistence\bin\Debug\net7.0\Persistence.pdb
+C:\Users\Johnn\RiderProjects\TMS\Persistence\obj\Debug\net7.0\Persistence.csproj.AssemblyReference.cache
+C:\Users\Johnn\RiderProjects\TMS\Persistence\obj\Debug\net7.0\Persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Johnn\RiderProjects\TMS\Persistence\obj\Debug\net7.0\Persistence.AssemblyInfoInputs.cache
+C:\Users\Johnn\RiderProjects\TMS\Persistence\obj\Debug\net7.0\Persistence.AssemblyInfo.cs
+C:\Users\Johnn\RiderProjects\TMS\Persistence\obj\Debug\net7.0\Persistence.csproj.CoreCompileInputs.cache
+C:\Users\Johnn\RiderProjects\TMS\Persistence\obj\Debug\net7.0\Persistence.dll
+C:\Users\Johnn\RiderProjects\TMS\Persistence\obj\Debug\net7.0\refint\Persistence.dll
+C:\Users\Johnn\RiderProjects\TMS\Persistence\obj\Debug\net7.0\Persistence.pdb
+C:\Users\Johnn\RiderProjects\TMS\Persistence\obj\Debug\net7.0\ref\Persistence.dll
