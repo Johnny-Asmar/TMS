@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Domain.Models
+// scaffolded from DB using EF
+
 {
     public partial class postgresContext : DbContext
     {

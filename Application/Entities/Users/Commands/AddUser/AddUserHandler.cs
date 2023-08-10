@@ -18,20 +18,23 @@ public class AddUserHandler : IRequestHandler<AddUserCommand, string>
 
     public async Task<string> Handle(AddUserCommand request, CancellationToken cancellationToken)
     {
+        // Validate User Input
         var validationResult = await _validator.ValidateAsync(request);
 
         if (!validationResult.IsValid)
         {
             throw new ValidationException(validationResult.Errors);
         }
-        
+        // Get User by username
         var FetchedUser = _postgresContext.Users.FirstOrDefault(t => t.username == request.username);
         if (FetchedUser != null)
         {
+            // Same Username!
             return "username taken";
         }
         else
         {
+            // create User
             User user = new User();
             user.username = request.username;
             user.password = request.password;

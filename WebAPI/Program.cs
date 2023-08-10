@@ -15,25 +15,22 @@ using Task = Domain.Models.Task;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-// Add DB
+
+// Configure DB
 builder.Services.AddScoped(typeof(postgresContext), typeof(postgresContext));
 
-// Add MediatR pattern
-// Add all the assemblies to MediatR
+// Configure MediatR pattern
 builder.Services.AddMediatR(typeof(AddTaskCommand).GetTypeInfo().Assembly);
-
-
 
 // Add the custom pipeline validation to DI
 builder.Services.AddScoped<IValidator<AddTaskCommand>, AddTaskValidator>();
 builder.Services.AddScoped<IValidator<UpdateTaskCommand>, UpdateTaskValidator>();
 builder.Services.AddScoped<IValidator<AddUserCommand>, AddUserValidator>();
-
 
 // Configure JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

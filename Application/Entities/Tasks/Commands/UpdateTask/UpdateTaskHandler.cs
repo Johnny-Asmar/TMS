@@ -19,6 +19,7 @@ public class UpdateTaskHandler : IRequestHandler<UpdateTaskCommand, string>
     
     public async Task<string> Handle(UpdateTaskCommand request, CancellationToken cancellationToken)
     {
+        // Check if Task Input is Valid
         var validationResult = await _validator.ValidateAsync(request);
 
         if (!validationResult.IsValid)
@@ -26,9 +27,11 @@ public class UpdateTaskHandler : IRequestHandler<UpdateTaskCommand, string>
             throw new ValidationException(validationResult.Errors);
         }
         
+        // Get Task By id
         var task = _postgresContext.Tasks.FirstOrDefault(t => t.Id == request.id);
         if (task != null)
         {
+            // If exists, update Task
             task.Priority = request.priority;
             task.Title = request.title;
             task.Description = request.description;
@@ -40,6 +43,7 @@ public class UpdateTaskHandler : IRequestHandler<UpdateTaskCommand, string>
         }
         else
         {
+            // Task does not exist
             throw new Exception("Does not exist");
         }
 

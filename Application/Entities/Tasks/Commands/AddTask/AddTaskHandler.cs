@@ -21,12 +21,15 @@ public class AddTaskHandler : IRequestHandler<AddTaskCommand, string>
 
     public async Task<string> Handle(AddTaskCommand request, CancellationToken cancellationToken)
     {
+        // Check if Task Input is Valid
         var validationResult = await _validator.ValidateAsync(request);
 
         if (!validationResult.IsValid)
         {
             throw new ValidationException(validationResult.Errors);
         }
+        
+        // If valid, create Task and add it to DB
         Task task = new Task();
         task.Priority = request.priority;
         task.Title = request.title;
@@ -34,7 +37,6 @@ public class AddTaskHandler : IRequestHandler<AddTaskCommand, string>
         task.AssignedTo = request.UserId;
         task.endDate = request.endDate;
         task.status = request.status;
-
         await _postgresContext.Tasks.AddAsync(task);
         _postgresContext.SaveChanges();
         return "done";

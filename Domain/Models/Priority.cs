@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 namespace Domain.Models
+// scaffolded from DB using EF
 {
     public partial class Priority
     {
