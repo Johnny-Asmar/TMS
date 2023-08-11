@@ -2,6 +2,8 @@ using Application.Entities.Tasks.Commands.AddTask;
 using Application.Entities.Tasks.Commands.DeleteTask;
 using Application.Entities.Tasks.Commands.UpdateTask;
 using Application.Entities.Tasks.Queries.GetTaskById;
+using Application.Entities.Tasks.Queries.GetTasks;
+using Application.ViewModel;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -49,16 +51,22 @@ public class TasksController : ControllerBase
 
         return task;
     }
-    
+
     [HttpGet("GetTaskById/{id:int}")]
-    public async Task<Task> GetTaskById([FromRoute]int id)
+    public async Task<TasksViewModel> GetTaskById([FromRoute] int id)
     {
-        return  await _mediator.Send(new GetTaskByIdQuery()
+        return await _mediator.Send(new GetTaskByIdQuery()
         {
             id = id
         });
-        
-
     }
+
+    [HttpGet("GetTasks")]
+    public async Task<List<TasksViewModel>> GetTasks([FromRoute]GetTasksQuery getTasksQuery)
+    {
+        var listOfTasks =  await _mediator.Send(getTasksQuery);
+        return listOfTasks;
+    }
+
 
 }

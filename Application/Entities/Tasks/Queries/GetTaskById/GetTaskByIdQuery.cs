@@ -1,9 +1,9 @@
+using Application.ViewModel;
 using MediatR;
-using Task = Domain.Models.Task;
 
 namespace Application.Entities.Tasks.Queries.GetTaskById;
 
-public class GetTaskByIdQuery : IRequest<Task>
+public class GetTaskByIdQuery : IRequest<TasksViewModel>
 {
     public int id { get; set; }
 }

@@ -3,7 +3,9 @@ using System.Text;
 using Application.Entities.Tasks.Commands.AddTask;
 using Application.Entities.Tasks.Commands.UpdateTask;
 using Application.Entities.Users.Queries.Register;
+using Application.Mappers;
 using Application.Validators;
+using AutoMapper;
 using Domain.Models;
 using FluentValidation;
 using FluentValidation.AspNetCore;
@@ -31,6 +33,15 @@ builder.Services.AddMediatR(typeof(AddTaskCommand).GetTypeInfo().Assembly);
 builder.Services.AddScoped<IValidator<AddTaskCommand>, AddTaskValidator>();
 builder.Services.AddScoped<IValidator<UpdateTaskCommand>, UpdateTaskValidator>();
 builder.Services.AddScoped<IValidator<AddUserCommand>, AddUserValidator>();
+
+// Configure Mapper
+var mapperConfig = new MapperConfiguration(mc =>
+{
+    mc.AddProfile(new TaskMapper());
+});
+
+IMapper mapper = mapperConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
 
 // Configure JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
