@@ -5,7 +5,6 @@ namespace Application.Entities.Tasks.Commands.AddTask;
 public class AddTaskCommand : IRequest<string>
 {
     
-    public int priority { get; set; }
     public string title { get; set; }
     public string description { get; set; }
     public int UserId { get; set; }

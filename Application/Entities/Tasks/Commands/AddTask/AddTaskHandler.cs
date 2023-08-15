@@ -31,7 +31,6 @@ public class AddTaskHandler : IRequestHandler<AddTaskCommand, string>
         
         // If valid, create Task and add it to DB
         Task task = new Task();
-        task.Priority = request.priority;
         task.Title = request.title;
         task.Description = request.description;
         task.AssignedTo = request.UserId;

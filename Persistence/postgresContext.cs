@@ -18,7 +18,6 @@ namespace Domain.Models
         {
         }
 
-        public virtual DbSet<Priority> Priorities { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Task> Tasks { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
@@ -35,17 +34,6 @@ namespace Domain.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasPostgresExtension("pg_catalog", "adminpack");
-
-            modelBuilder.Entity<Priority>(entity =>
-            {
-                entity.ToTable("Priority");
-
-                entity.HasIndex(e => e.Id, "priority_id_uindex")
-                    .IsUnique();
-
-                entity.Property(e => e.Id).HasColumnName("id");
-            });
-
             modelBuilder.Entity<Role>(entity =>
             {
                 entity.HasIndex(e => e.Id, "roles_id_uindex")
@@ -68,12 +56,6 @@ namespace Domain.Models
                     .HasForeignKey(d => d.AssignedTo)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("tasks_users_id_fk");
-
-                entity.HasOne(d => d.PriorityNavigation)
-                    .WithMany(p => p.Tasks)
-                    .HasForeignKey(d => d.Priority)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("tasks_priority_id_fk");
             });
 
             modelBuilder.Entity<User>(entity =>

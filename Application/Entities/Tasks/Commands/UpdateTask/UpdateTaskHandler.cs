@@ -32,7 +32,6 @@ public class UpdateTaskHandler : IRequestHandler<UpdateTaskCommand, string>
         if (task != null)
         {
             // If exists, update Task
-            task.Priority = request.priority;
             task.Title = request.title;
             task.Description = request.description;
             task.AssignedTo = request.UserId;

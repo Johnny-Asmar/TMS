@@ -1,6 +1,9 @@
 using Application.Entities.Users.Queries.CreateUserToken;
+using Application.Entities.Users.Queries.GetUserByName;
+using Application.Entities.Users.Queries.GetUsers;
 using Application.Entities.Users.Queries.Login;
 using Application.Entities.Users.Queries.Register;
+using Domain.Models;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +21,7 @@ public class UsersController : Controller
     }
 
     [HttpPost("UserExist")]
-    public async Task<string> CheckUserExist(UserExistQuery userExistQuery)
+    public async Task<int> CheckUserExist(UserExistQuery userExistQuery)
     {
         var result = await _mediator.Send(userExistQuery);
         return result;
@@ -36,6 +39,19 @@ public class UsersController : Controller
     {
         var result = await _mediator.Send(createUserTokenQuery);
         return result;
+    }
+    
+    [HttpGet("GetUsers")]
+    public async Task<List<User>> GetUsers([FromRoute]GetUsersQuery getUsersQuery)
+    {
+        var listOfUsers =  await _mediator.Send(getUsersQuery);
+        return listOfUsers;
+    }
+    [HttpGet("GetUserByName")]
+    public async Task<User> GetUserByName([FromQuery] GetUserByNameQuery getUserByNameQuery)
+    {
+        var user =  await _mediator.Send(getUserByNameQuery);
+        return user;
     }
 
 }

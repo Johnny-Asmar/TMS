@@ -43,29 +43,41 @@ var mapperConfig = new MapperConfiguration(mc =>
 IMapper mapper = mapperConfig.CreateMapper();
 builder.Services.AddSingleton(mapper);
 
+// Configure CORS to send APIs to the FrontEnd
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowOrigin",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:3000")
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
 // Configure JWT
+var key = Encoding.UTF8.GetBytes("ThisIsMySecretKeyzzxxxxxx");
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
+        options.SaveToken = true;
+        options.RequireHttpsMetadata = false;
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
             ValidateAudience = true,
+            ValidIssuer = "http://localhost:5125",
+            ValidAudience = "http://localhost:5125",
+            ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = "xxxxx",
-            ValidAudience = "xxxx",
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ThisIsMySecretKeyzzxxxxxx")) // Replace with your secret key
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+
         };
     });
 
-// Configure role-based authorization
-builder.Services.AddAuthorization(options => {
-    options.AddPolicy("Admin", policy => policy.RequireRole("admin"));
-    options.AddPolicy("User", policy => policy.RequireRole("user"));
-});
-
 
 var app = builder.Build();
+app.UseCors("AllowOrigin");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

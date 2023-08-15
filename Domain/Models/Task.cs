@@ -8,7 +8,6 @@ namespace Domain.Models
     public partial class Task
     {
         public int Id { get; set; }
-        public int Priority { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public int AssignedTo { get; set; }
@@ -17,6 +16,5 @@ namespace Domain.Models
 
 
         public virtual User AssignedToNavigation { get; set; } = null!;
-        public virtual Priority PriorityNavigation { get; set; } = null!;
     }
 }

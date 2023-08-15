@@ -11,10 +11,8 @@ using Task = Domain.Models.Task;
 
 
 namespace WebApi.Controllers;
-
 [Route("[controller]")]
 [ApiController]
-
 public class TasksController : ControllerBase
 {
     private readonly IMediator _mediator;
@@ -43,10 +41,9 @@ public class TasksController : ControllerBase
         });
     }
 
-    [HttpPut("UpdateTask/{id:int}")]
-    public async Task<string> UpdateUser([FromRoute] int id, [FromBody] UpdateTaskCommand updateTaskCommand)
+    [HttpPost("UpdateTask")]
+    public async Task<string> UpdateUser([FromBody] UpdateTaskCommand updateTaskCommand)
     {
-        updateTaskCommand.id = id;
         var task = await _mediator.Send(updateTaskCommand);
 
         return task;
@@ -62,7 +59,7 @@ public class TasksController : ControllerBase
     }
 
     [HttpGet("GetTasks")]
-    public async Task<List<TasksViewModel>> GetTasks([FromRoute]GetTasksQuery getTasksQuery)
+    public async Task<List<GetTasksDTO>> GetTasks([FromRoute]GetTasksQuery getTasksQuery)
     {
         var listOfTasks =  await _mediator.Send(getTasksQuery);
         return listOfTasks;

@@ -5,7 +5,7 @@ using Task = System.Threading.Tasks.Task;
 
 namespace Application.Entities.Users.Queries.Login;
 
-public class UserExistHandler : IRequestHandler<UserExistQuery, string>
+public class UserExistHandler : IRequestHandler<UserExistQuery, int>
 {
     public postgresContext _postgresContext;
     
@@ -14,16 +14,16 @@ public class UserExistHandler : IRequestHandler<UserExistQuery, string>
         _postgresContext = postgresContext;
     }
 
-    public async Task<string> Handle(UserExistQuery request, CancellationToken cancellationToken)
+    public async Task<int> Handle(UserExistQuery request, CancellationToken cancellationToken)
     {
         var FetchedUser = _postgresContext.Users.FirstOrDefault(t => t.username == request.username && t.password == request.password);
         if (FetchedUser != null)
         {
-            return "success";
+            return FetchedUser.RoleId;
         }
         else
         {
-            throw new Exception("Does not exist");
+            return 0;
         }
 
     }
