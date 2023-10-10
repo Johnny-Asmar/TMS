@@ -3,15 +3,16 @@ using System.Text;
 using Application.Entities.Tasks.Commands.AddTask;
 using Application.Entities.Tasks.Commands.UpdateTask;
 using Application.Entities.Users.Queries.Register;
-using Application.Mappers;
+using Application.Repositories.Abstraction;
+using Application.Repositories.Implementations;
 using Application.Validators;
-using AutoMapper;
-using Domain.Models;
+using Application.ViewModel;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Persistence.DB;
 using Task = Domain.Models.Task;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,7 +25,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Configure DB
-builder.Services.AddScoped(typeof(postgresContext), typeof(postgresContext));
+builder.Services.AddScoped(typeof(Context), typeof(Context));
+// Configure Interfaces
+builder.Services.AddScoped<ITaskRepository, TaskRepository>();
 
 // Configure MediatR pattern
 builder.Services.AddMediatR(typeof(AddTaskCommand).GetTypeInfo().Assembly);
@@ -34,14 +37,6 @@ builder.Services.AddScoped<IValidator<AddTaskCommand>, AddTaskValidator>();
 builder.Services.AddScoped<IValidator<UpdateTaskCommand>, UpdateTaskValidator>();
 builder.Services.AddScoped<IValidator<AddUserCommand>, AddUserValidator>();
 
-// Configure Mapper
-var mapperConfig = new MapperConfiguration(mc =>
-{
-    mc.AddProfile(new TaskMapper());
-});
-
-IMapper mapper = mapperConfig.CreateMapper();
-builder.Services.AddSingleton(mapper);
 
 // Configure CORS to send APIs to the FrontEnd
 builder.Services.AddCors(options =>

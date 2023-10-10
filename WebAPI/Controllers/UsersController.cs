@@ -44,6 +44,7 @@ public class UsersController : Controller
     [HttpGet("GetUsers")]
     public async Task<List<User>> GetUsers([FromRoute]GetUsersQuery getUsersQuery)
     {
+        Console.WriteLine("Controllerr");
         var listOfUsers =  await _mediator.Send(getUsersQuery);
         return listOfUsers;
     }

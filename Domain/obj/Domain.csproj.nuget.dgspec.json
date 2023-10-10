@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Johnn\\RiderProjects\\TMS\\Domain\\Domain.csproj": {}
+    "C:\\.Net Projects\\TMS\\Domain\\Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Johnn\\RiderProjects\\TMS\\Domain\\Domain.csproj": {
+    "C:\\.Net Projects\\TMS\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Johnn\\RiderProjects\\TMS\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\.Net Projects\\TMS\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\Johnn\\RiderProjects\\TMS\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\Johnn\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Johnn\\RiderProjects\\TMS\\Domain\\obj\\",
+        "projectPath": "C:\\.Net Projects\\TMS\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\dev016\\.nuget\\packages\\",
+        "outputPath": "C:\\.Net Projects\\TMS\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Johnn\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\dev016\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -75,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

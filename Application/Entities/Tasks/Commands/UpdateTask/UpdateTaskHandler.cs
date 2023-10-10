@@ -1,50 +1,31 @@
-using Application.Entities.Tasks.Commands.AddTask;
-using Application.Entities.Tasks.Commands.DeleteTask;
-using Domain.Models;
+using Application.Repositories.Abstraction;
+using Application.Repositories.Implementations;
 using FluentValidation;
 using MediatR;
+using Persistence.DB;
 
 namespace Application.Entities.Tasks.Commands.UpdateTask;
 
-public class UpdateTaskHandler : IRequestHandler<UpdateTaskCommand, string>
+public class UpdateTaskHandler : IRequestHandler<UpdateTaskCommand, ApiResponse<string>>
 {
     private readonly IValidator<UpdateTaskCommand> _validator;
-    private postgresContext _postgresContext;
+    private ITaskRepository _taskRepository;
     
-    public UpdateTaskHandler(postgresContext postgresContext, IValidator<UpdateTaskCommand> validator)
+    public UpdateTaskHandler(ITaskRepository taskRepository, IValidator<UpdateTaskCommand> validator)
     {
         _validator = validator;
-        _postgresContext = postgresContext;
+        _taskRepository = taskRepository;
     }
     
-    public async Task<string> Handle(UpdateTaskCommand request, CancellationToken cancellationToken)
+    public async Task<ApiResponse<string>> Handle(UpdateTaskCommand request, CancellationToken cancellationToken)
     {
         // Check if Task Input is Valid
         var validationResult = await _validator.ValidateAsync(request);
-
         if (!validationResult.IsValid)
         {
-            throw new ValidationException(validationResult.Errors);
-        }
-        
-        // Get Task By id
-        var task = _postgresContext.Tasks.FirstOrDefault(t => t.Id == request.id);
-        if (task != null)
-        {
-            // If exists, update Task
-            task.Title = request.title;
-            task.Description = request.description;
-            task.AssignedTo = request.UserId;
-            task.endDate = request.endDate;
-            task.status = request.status;
-            await _postgresContext.SaveChangesAsync();
-            return "done";
-        }
-        else
-        {
-            // Task does not exist
-            throw new Exception("Does not exist");
+            return new ApiResponse<string>(1, "Update Task FAILED", "Not Done", validationResult.Errors.ToString());
         }
 
+        return _taskRepository.UpdateTask(request);
     }
 }

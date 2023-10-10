@@ -1,31 +1,23 @@
 using Application.Entities.Tasks.Queries.GetTaskById;
 using Domain.Models;
 using MediatR;
+using Persistence.DB;
 using Task = System.Threading.Tasks.Task;
 
 namespace Application.Entities.Users.Queries.Login;
 
 public class UserExistHandler : IRequestHandler<UserExistQuery, int>
 {
-    public postgresContext _postgresContext;
+    public Context _postgresContext;
     
-    public UserExistHandler(postgresContext postgresContext)
+    public UserExistHandler(Context postgresContext)
     {
         _postgresContext = postgresContext;
     }
 
     public async Task<int> Handle(UserExistQuery request, CancellationToken cancellationToken)
     {
-        var FetchedUser = _postgresContext.Users.FirstOrDefault(t => t.username == request.username && t.password == request.password);
-        if (FetchedUser != null)
-        {
-            return FetchedUser.RoleId;
-        }
-        else
-        {
-            return 0;
-        }
-
+        var FetchedUser = _postgresContext.Users.ToList().FirstOrDefault(t => t.Username == request.username && t.Password == request.password, new User { Id=-1, Name = "NOT FOUND"});
+        return FetchedUser.RoleId;
     }
-
 }

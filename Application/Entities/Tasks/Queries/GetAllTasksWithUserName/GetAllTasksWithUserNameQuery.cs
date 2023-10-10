@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Application.Entities.Tasks.Queries.GetTasks;
 
-public class GetTasksQuery : IRequest<List<GetTasksDTO>>
+public class GetAllTasksWithUserNameQuery : IRequest<ApiResponse<List<GetTasksWithUserNameDTO>>>
 {
     
 }

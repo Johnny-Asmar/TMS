@@ -15,3 +15,20 @@ C:\Users\Johnn\RiderProjects\TMS\Persistence\bin\Debug\net7.0\Domain.dll
 C:\Users\Johnn\RiderProjects\TMS\Persistence\bin\Debug\net7.0\Domain.pdb
 C:\Users\Johnn\RiderProjects\TMS\Persistence\obj\Debug\net7.0\Persistence.csproj.CopyComplete
 C:\Users\Johnn\RiderProjects\TMS\Persistence\obj\Debug\net7.0\Persistence.genruntimeconfig.cache
+C:\.Net Projects\TMS\Persistence\bin\Debug\net7.0\Persistence.deps.json
+C:\.Net Projects\TMS\Persistence\bin\Debug\net7.0\Persistence.runtimeconfig.json
+C:\.Net Projects\TMS\Persistence\bin\Debug\net7.0\Persistence.dll
+C:\.Net Projects\TMS\Persistence\bin\Debug\net7.0\Persistence.pdb
+C:\.Net Projects\TMS\Persistence\bin\Debug\net7.0\Domain.dll
+C:\.Net Projects\TMS\Persistence\bin\Debug\net7.0\Domain.pdb
+C:\.Net Projects\TMS\Persistence\obj\Debug\net7.0\Persistence.csproj.AssemblyReference.cache
+C:\.Net Projects\TMS\Persistence\obj\Debug\net7.0\Persistence.GeneratedMSBuildEditorConfig.editorconfig
+C:\.Net Projects\TMS\Persistence\obj\Debug\net7.0\Persistence.AssemblyInfoInputs.cache
+C:\.Net Projects\TMS\Persistence\obj\Debug\net7.0\Persistence.AssemblyInfo.cs
+C:\.Net Projects\TMS\Persistence\obj\Debug\net7.0\Persistence.csproj.CoreCompileInputs.cache
+C:\.Net Projects\TMS\Persistence\obj\Debug\net7.0\Persistence.csproj.CopyComplete
+C:\.Net Projects\TMS\Persistence\obj\Debug\net7.0\Persistence.dll
+C:\.Net Projects\TMS\Persistence\obj\Debug\net7.0\refint\Persistence.dll
+C:\.Net Projects\TMS\Persistence\obj\Debug\net7.0\Persistence.pdb
+C:\.Net Projects\TMS\Persistence\obj\Debug\net7.0\Persistence.genruntimeconfig.cache
+C:\.Net Projects\TMS\Persistence\obj\Debug\net7.0\ref\Persistence.dll

@@ -1,43 +1,35 @@
 
+using Application;
 using Application.Entities.Tasks.Commands.AddTask;
+using Application.Repositories.Abstraction;
 using Application.Validators;
-using Domain.Models;
 using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
+using Persistence.DB;
 using Task = Domain.Models.Task;
 
 
-public class AddTaskHandler : IRequestHandler<AddTaskCommand, string>
+public class AddTaskHandler : IRequestHandler<AddTaskCommand, ApiResponse<string>>
 {
     private readonly IValidator<AddTaskCommand> _validator;
-    private postgresContext _postgresContext;
+    private ITaskRepository _taskRepository;
     
-    public AddTaskHandler(postgresContext postgresContext, IValidator<AddTaskCommand> validator)
+    public AddTaskHandler(ITaskRepository taskRepository, IValidator<AddTaskCommand> validator)
     {
         _validator = validator;
-        _postgresContext = postgresContext;
+        _taskRepository = taskRepository;
     }
 
-    public async Task<string> Handle(AddTaskCommand request, CancellationToken cancellationToken)
+    public async Task<ApiResponse<string>> Handle(AddTaskCommand request, CancellationToken cancellationToken)
     {
         // Check if Task Input is Valid
         var validationResult = await _validator.ValidateAsync(request);
-
         if (!validationResult.IsValid)
         {
-            throw new ValidationException(validationResult.Errors);
+            new ApiResponse<string>(-1, "NOT VALIDATED", "NOT PASSED", new ValidationException(validationResult.Errors).ToString());
         }
-        
         // If valid, create Task and add it to DB
-        Task task = new Task();
-        task.Title = request.title;
-        task.Description = request.description;
-        task.AssignedTo = request.UserId;
-        task.endDate = request.endDate;
-        task.status = request.status;
-        await _postgresContext.Tasks.AddAsync(task);
-        _postgresContext.SaveChanges();
-        return "done";
+        return _taskRepository.AddTask(request);
     }
 }

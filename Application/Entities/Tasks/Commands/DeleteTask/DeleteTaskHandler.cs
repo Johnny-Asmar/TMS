@@ -1,34 +1,21 @@
-using Domain.Models;
 namespace Application.Entities.Tasks.Commands.DeleteTask;
+
+using Application.Repositories.Abstraction;
 using MediatR;
+using Persistence.DB;
 
-
-public class DeleteTaskHandler : IRequestHandler<DeleteTaskCommand, string>
+public class DeleteTaskHandler : IRequestHandler<DeleteTaskCommand, ApiResponse<string>>
 {
 
-    private postgresContext _postgresContext;
+    private ITaskRepository _taskRepository;
     
-    public DeleteTaskHandler(postgresContext postgresContext)
+    public DeleteTaskHandler(ITaskRepository taskRepository)
     {
-        _postgresContext = postgresContext;
+        _taskRepository = taskRepository;
     }
-    public async Task<string> Handle(DeleteTaskCommand request, CancellationToken cancellationToken)
+    public async Task<ApiResponse<string>> Handle(DeleteTaskCommand request, CancellationToken cancellationToken)
     {
-        // Get Task By id
-        var task = _postgresContext.Tasks.FirstOrDefault(t => t.Id == request.id);
-        if (task != null)
-        {
-            // Task exists, delete it
-            _postgresContext.Tasks.Remove(task);
-            _postgresContext.SaveChanges();
-            return "done";
-        }
-        else
-        {
-            // Task does not exist
-            throw new Exception("Does not exist");
-        }
-
+        return _taskRepository.DeleteTask(request.id);
     }
     
 }

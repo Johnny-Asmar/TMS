@@ -1,3 +1,4 @@
+using Application;
 using Application.Entities.Tasks.Commands.AddTask;
 using Application.Entities.Tasks.Commands.DeleteTask;
 using Application.Entities.Tasks.Commands.UpdateTask;
@@ -23,17 +24,17 @@ public class TasksController : ControllerBase
     }
 
     [HttpPost("AddTask")]
-    public async Task<IActionResult> AddTask([FromBody] AddTaskCommand addTaskCommand)
+    public async Task<ApiResponse<string>> AddTask([FromBody] AddTaskCommand addTaskCommand)
     {
 
         var task = await _mediator.Send(addTaskCommand);
 
-        return Ok(task);
+        return task;
 
     }
 
     [HttpDelete("DeleteTask/{id:int}")]
-    public async Task<string> DeleteTask([FromRoute] int id)
+    public async Task<ApiResponse<string>> DeleteTask([FromRoute] int id)
     {
         return await _mediator.Send(new DeleteTaskCommand()
         {
@@ -42,15 +43,14 @@ public class TasksController : ControllerBase
     }
 
     [HttpPost("UpdateTask")]
-    public async Task<string> UpdateUser([FromBody] UpdateTaskCommand updateTaskCommand)
+    public async Task<ApiResponse<string>> UpdateUser([FromBody] UpdateTaskCommand updateTaskCommand)
     {
         var task = await _mediator.Send(updateTaskCommand);
-
         return task;
     }
 
     [HttpGet("GetTaskById/{id:int}")]
-    public async Task<TasksViewModel> GetTaskById([FromRoute] int id)
+    public async Task<ApiResponse<GetTasksDTO>> GetTaskById([FromRoute] int id)
     {
         return await _mediator.Send(new GetTaskByIdQuery()
         {
@@ -58,12 +58,10 @@ public class TasksController : ControllerBase
         });
     }
 
-    [HttpGet("GetTasks")]
-    public async Task<List<GetTasksDTO>> GetTasks([FromRoute]GetTasksQuery getTasksQuery)
+    [HttpGet("GetAllTasksWithUserName")]
+    public async Task<ApiResponse<List<GetTasksWithUserNameDTO>>> GetAllTasksWithUserName([FromRoute]GetAllTasksWithUserNameQuery getTasksQuery)
     {
         var listOfTasks =  await _mediator.Send(getTasksQuery);
         return listOfTasks;
     }
-
-
 }
